@@ -2,9 +2,6 @@ import requests
 import psycopg2
 import os
 
-# ========================
-# VARIÁVEIS DO GITHUB
-# ========================
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
@@ -21,7 +18,7 @@ cursor = conn.cursor()
 url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
 # =====================================================
-# MENSAGEM 3 — RESUMO GERAL
+# RESUMO GERAL
 # =====================================================
 
 cursor.execute("SELECT * FROM vw_valle_projecao_geral_telegram;")
@@ -43,10 +40,10 @@ mensagem_geral = f"""
 ⏳ Dias úteis restantes: {g[4]}
 """
 
-requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_geral, "parse_mode":"Markdown"})
+requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_geral, "parse_mode": "Markdown"})
 
 # =====================================================
-# MENSAGEM 1 — COOPERATIVAS
+# COOPERATIVAS
 # =====================================================
 
 cursor.execute("SELECT * FROM vw_valle_projecao_cooperativa_telegram;")
@@ -61,10 +58,10 @@ for c in coops:
         f"Projeção: {int(c[8])} | Prob: {c[9]}%\n\n"
     )
 
-requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_coop, "parse_mode":"Markdown"})
+requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_coop, "parse_mode": "Markdown"})
 
 # =====================================================
-# MENSAGEM 2 — TOP 10 CONSULTORES
+# TOP 10 CONSULTORES
 # =====================================================
 
 cursor.execute("""
@@ -83,7 +80,6 @@ for c in consultores:
         f"Placas: {c[1]} | Ritmo: {c[2]} | Projeção: {int(c[3])}\n\n"
     )
 
-
-requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_consultor, "parse_mode":"Markdown"})
+requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_consultor, "parse_mode": "Markdown"})
 
 print("Painel completo enviado!")
