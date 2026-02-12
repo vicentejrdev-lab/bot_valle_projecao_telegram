@@ -57,8 +57,11 @@ mensagem_coop = "🏢 *VALLE — COOPERATIVAS*\n\n"
 for c in coops:
     mensagem_coop += (
         f"*{c[0]}*\n"
-        f"Placas: {c[2]} | Ritmo: {c[6]} | Exigido: {c[7]}\n"
-        f"Projeção: {int(c[8])} | Prob: {c[9]}%\n\n"
+        f"Placas: {c[2]} 
+        Ritmo: {c[6]}
+        Exigido: {c[7]}\n"
+        f"Projeção: {int(c[8])}
+        Prob: {c[9]}%\n\n"
     )
 
 requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_coop, "parse_mode":"Markdown"})
@@ -80,7 +83,9 @@ mensagem_consultor = "👤 *VALLE — TOP 10 CONSULTORES*\n\n"
 for c in consultores:
     mensagem_consultor += (
         f"{c[0]}\n"
-        f"Placas: {c[1]} | Ritmo: {c[2]} | Projeção: {int(c[3])}\n\n"
+        f"Placas: {c[1]}
+        Ritmo: {c[2]}
+        Projeção: {int(c[3])}\n\n"
     )
 
 requests.post(url, data={"chat_id": CHAT_ID, "text": mensagem_consultor, "parse_mode":"Markdown"})
